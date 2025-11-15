@@ -1,5 +1,9 @@
-﻿from pydantic import BaseModel, Field
+﻿from __future__ import annotations
+
+from datetime import datetime
 from typing import Any, Dict, List, Optional
+
+from pydantic import BaseModel, Field
 
 
 class HealthResponse(BaseModel):
@@ -23,9 +27,11 @@ class InvitationFilters(BaseModel):
 class InvitationRequest(BaseModel):
     filters: InvitationFilters = Field(default_factory=InvitationFilters)
     candidates: List[Dict[str, Any]] | None = None
+    message: Optional[str] = None
 
 
 class InvitationResponse(BaseModel):
     total_candidates: int
     filters: Dict[str, str]
     invitations: List[Dict[str, Any]]
+    timestamp: datetime = Field(default_factory=datetime.utcnow)

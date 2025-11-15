@@ -6,3 +6,8 @@ storage:
   excel_path: data/outputs/invitations.xlsx
 invitations:
   dataset_path: data/inputs/candidates.sample.json
+linkedin:
+  base_url: https://api.linkedin.com/v2
+  access_token: ''
+  client_id: ''
+  client_secret: ''

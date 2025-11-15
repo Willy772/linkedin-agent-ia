@@ -1,4 +1,6 @@
-﻿from functools import lru_cache
+﻿from __future__ import annotations
+
+from functools import lru_cache
 from pathlib import Path
 
 import yaml
@@ -19,6 +21,13 @@ class InvitationConfig(BaseModel):
     dataset_path: str = Field(default='data/inputs/candidates.sample.json', alias='INVITATION_DATASET_PATH')
 
 
+class LinkedInConfig(BaseModel):
+    base_url: str = Field(default='https://api.linkedin.com/v2', alias='LINKEDIN_BASE_URL')
+    access_token: str | None = Field(default=None, alias='LINKEDIN_ACCESS_TOKEN')
+    client_id: str | None = Field(default=None, alias='LINKEDIN_CLIENT_ID')
+    client_secret: str | None = Field(default=None, alias='LINKEDIN_CLIENT_SECRET')
+
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file='.env', env_file_encoding='utf-8', extra='ignore')
 
@@ -26,6 +35,7 @@ class Settings(BaseSettings):
     app: AppConfig = AppConfig()
     storage: StorageConfig = StorageConfig()
     invitations: InvitationConfig = InvitationConfig()
+    linkedin: LinkedInConfig = LinkedInConfig()
 
 
 def load_settings(path: Path | None = None) -> Settings:

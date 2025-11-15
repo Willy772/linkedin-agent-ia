@@ -14,6 +14,7 @@ def _build_request(
     title: str | None,
     company: str | None,
     location: str | None,
+    message: str | None,
     candidates_file: Path | None,
 ) -> InvitationRequest:
     filters = InvitationFilters(school=school, title=title, company=company, location=location)
@@ -23,7 +24,7 @@ def _build_request(
         if not isinstance(data, list):
             raise typer.BadParameter('Le fichier de candidats doit contenir une liste de profils.')
         candidates = data
-    return InvitationRequest(filters=filters, candidates=candidates)
+    return InvitationRequest(filters=filters, candidates=candidates, message=message)
 
 
 @cli.command('send-invitations')
@@ -33,15 +34,16 @@ def send_invitations(
     title: str | None = typer.Option(None, help="Filtrer par titre de poste."),
     company: str | None = typer.Option(None, help="Filtrer par entreprise."),
     location: str | None = typer.Option(None, help="Filtrer par localisation (ex: Ile-de-France)."),
+    message: str | None = typer.Option(None, help="Message personnalisé envoyé avec l'invitation."),
     candidates_file: Path | None = typer.Option(None, help='Fichier JSON contenant des candidats à la place de la source par défaut.'),
 ):
     """Lance la préparation d'invitations et journalise le suivi dans Excel."""
 
     settings = load_settings(config)
     workflow = InvitationWorkflow.from_settings(settings)
-    request = _build_request(school, title, company, location, candidates_file)
+    request = _build_request(school, title, company, location, message, candidates_file)
     response = workflow.run(request)
-    typer.echo(f"{response.total_candidates} invitation(s) préparée(s).")
+    typer.echo(f"{response.total_candidates} invitation(s) ciblée(s).")
     typer.echo(f"Journal Excel: {settings.storage.excel_path}")
 
 
