@@ -1,0 +1,23 @@
+﻿[
+  {
+    "full_name": "Alice Dupont",
+    "school": "ESIGELEC",
+    "title": "Ingénieure IA",
+    "company": "InnovTech",
+    "location": "Ile-de-France"
+  },
+  {
+    "full_name": "Bruno Martin",
+    "school": "INSA",
+    "title": "Data Scientist",
+    "company": "DataCorp",
+    "location": "Lyon"
+  },
+  {
+    "full_name": "Céline Moreau",
+    "school": "ESIGELEC",
+    "title": "Chef de projet",
+    "company": "StartupX",
+    "location": "Toulouse"
+  }
+]

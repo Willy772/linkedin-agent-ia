@@ -1,0 +1,29 @@
+﻿<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Validation LinkedIn Agent IA</title>
+    <style>
+      body { font-family: Arial, sans-serif; }
+      .container { border: 1px solid #ddd; padding: 20px; }
+      .buttons a {
+        display: inline-block; padding: 12px 20px; margin: 10px;
+        color: #fff; text-decoration: none; border-radius: 4px;
+      }
+      .approve { background: #2e7d32; }
+      .reject { background: #c62828; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <p>Bonjour,</p>
+      <p>Merci de valider l’action suivante :</p>
+      <pre>{{ details }}</pre>
+      <div class="buttons">
+        <a class="approve" href="{{ approval_url }}?decision=approve">Accepter</a>
+        <a class="reject" href="{{ approval_url }}?decision=reject">Refuser</a>
+      </div>
+      <p>— LinkedIn Agent IA</p>
+    </div>
+  </body>
+</html>
